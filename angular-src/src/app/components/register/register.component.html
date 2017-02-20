@@ -4,43 +4,83 @@
 <hr />
 <form [formGroup]="form" (submit)="onRegisterSubmit()" novalidate>
   <label class="label">Name</label>
-  <p class="control">
+  <p class="control has-icon has-icon-right">
     <input 
       class="input" 
+      [ngClass]="{
+        'is-danger': !form.controls['name'].valid && form.controls['name'].touched,
+        'is-success': form.controls['name'].valid
+      }"
       type="text" 
       placeholder="Enter name"
       formControlName="name">
+    <span *ngIf="form.controls['name'].valid" class="icon is-small">
+      <i class="fa fa-check"></i>
+    </span>
+    <span *ngIf="formErrors.name" class="help is-danger">
+      {{ formErrors.name }}
+    </span>
   </p>
   <label class="label">Username</label>
   <p class="control has-icon has-icon-right">
     <input 
       class="input" 
+      [ngClass]="{
+        'is-danger': !form.controls['username'].valid && form.controls['username'].touched,
+        'is-success': form.controls['username'].valid
+      }"
       type="text" 
       placeholder="Enter username"
       formControlName="username">
+    <span *ngIf="form.controls['username'].valid" class="icon is-small">
+      <i class="fa fa-check"></i>
+    </span>
+    <span *ngIf="formErrors.username" class="help is-danger">
+      {{ formErrors.username }}
+    </span>
   </p>
   <label class="label">Email</label>
   <p class="control has-icon has-icon-right">
     <input 
       class="input" 
+      [ngClass]="{
+        'is-danger': !form.controls['email'].valid && form.controls['email'].touched,
+        'is-success': form.controls['email'].valid
+      }"
       type="text" 
       placeholder="Enter Email"
       formControlName="email">
+    <span *ngIf="form.controls['email'].valid" class="icon is-small">
+      <i class="fa fa-check"></i>
+    </span>
+    <span *ngIf="formErrors.email" class="help is-danger">
+      {{ formErrors.email }}
+    </span>
   </p>
   <label class="label">Password</label>
   <p class="control has-icon has-icon-right">
     <input 
       class="input" 
+      [ngClass]="{
+        'is-danger': !form.controls['password'].valid && form.controls['password'].touched,
+        'is-success': form.controls['password'].valid
+      }"
       type="text" 
       placeholder="Enter password"
       formControlName="password">
+    <span *ngIf="form.controls['password'].valid" class="icon is-small">
+        <i class="fa fa-check"></i>
+      </span>
+      <span *ngIf="formErrors.password" class="help is-danger">
+        {{ formErrors.password }}
+      </span>
   </p>
   <div class="control is-grouped">
     <p class="control">
       <button class="button is-primary">Submit</button>
     </p>
     <p class="control">
-      <button class="button is-link">Cancel</button>
+      <button class="button is-link" (click)="form.reset()">Reset</button>
     </p>
   </div>
 </form>
