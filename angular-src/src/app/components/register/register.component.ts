@@ -125,6 +125,7 @@ export class RegisterComponent implements OnInit {
         this._flashMessage.show('You are now registered and able to log in!', {cssClass: 'notification is-success', timeout: 3000});
         this._router.navigate(['/login']);
       } else {
+        this._flashMessage.show(data.msg, {cssClass: 'notification is-danger', timeout: 3000});
 
       }
     });

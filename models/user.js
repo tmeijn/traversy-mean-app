@@ -10,11 +10,25 @@ const UserSchema = mongoose.Schema({
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    validate: {
+      validator: function(v, cb) {
+        User.count({email: v}, (err, count) => {
+          cb(count === 0, 'Email already exists!');
+        });
+      }
+    }
   },
   username: {
     type: String,
-    required: true
+    required: true,
+    validate: {
+      validator: function(v, cb) {
+        User.count({username: v}, (err, count) => {
+          cb(count === 0, 'Username already exists!');
+        });
+      }
+    }
   },
   password: {
     type: String,
