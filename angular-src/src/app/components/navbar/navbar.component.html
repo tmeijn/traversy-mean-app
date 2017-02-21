@@ -11,6 +11,20 @@
         [routerLink]="['/']">
         Home
       </a>
+      <a 
+        class="nav-item is-tab is-hidden-mobile"
+        [routerLinkActive]="['is-active']"
+        [routerLinkActiveOptions]= "{exact: true}"
+        [routerLink]="['/dashboard']">
+        Dashboard
+      </a>
+      <a 
+        class="nav-item is-tab is-hidden-mobile"
+        [routerLinkActive]="['is-active']"
+        [routerLinkActiveOptions]= "{exact: true}"
+        [routerLink]="['/profile']">
+        Profile
+      </a>
     </div>
     <span class="nav-toggle">
       <span></span>

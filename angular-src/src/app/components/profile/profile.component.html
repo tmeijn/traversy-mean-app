@@ -1,3 +1,16 @@
-<p>
-  profile works!
-</p>
+<div *ngIf="user">
+  <div class="content">
+    <h1>Profile of {{user.name}}</h1>
+  </div>
+  <hr />
+  <section class="content">
+    <ul>
+      <li>{{ user.username }}</li>
+      <li>{{ user.email }}</li>
+    </ul>
+  </section>
+  <pre>
+    {{ user | json }}
+  </pre>
+</div>
+
