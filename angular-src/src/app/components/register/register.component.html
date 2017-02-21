@@ -48,7 +48,7 @@
         'is-success': form.controls['email'].valid
       }"
       type="text" 
-      placeholder="Enter Email"
+      placeholder="Enter email"
       formControlName="email">
     <span *ngIf="form.controls['email'].valid" class="icon is-small">
       <i class="fa fa-check"></i>
@@ -77,7 +77,7 @@
   </p>
   <div class="control is-grouped">
     <p class="control">
-      <button class="button is-primary">Submit</button>
+      <button class="button is-primary" [disabled]="!form.valid">Submit</button>
     </p>
     <p class="control">
       <button class="button is-link" (click)="form.reset()">Reset</button>

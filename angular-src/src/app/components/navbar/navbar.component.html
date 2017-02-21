@@ -27,6 +27,12 @@
       </a>
       <a 
         class="nav-item is-tab is-hidden-mobile"
+        (click)="onLogoutClick()"
+        href="#">
+        Logout
+      </a>
+      <a 
+        class="nav-item is-tab is-hidden-mobile"
         [routerLinkActive]="['is-active']"
         [routerLinkActiveOptions]= "{exact: true}"
         [routerLink]="['/register']">
