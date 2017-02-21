@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FlashMessagesService } from 'angular2-flash-messages';
+
+import { AuthService } from '../../services/auth.service';
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'app-register',
@@ -9,8 +14,14 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Valida
 export class RegisterComponent implements OnInit {
   form: FormGroup;
   
+  
 
-  constructor(public _formBuilder: FormBuilder) { 
+  constructor(
+    public _formBuilder: FormBuilder, 
+    private _authservice: AuthService,
+    private _router: Router,
+    private _flashMessage: FlashMessagesService
+    ) {
     // Build the form group
     this.form = this._formBuilder.group({
       name: ['', [
@@ -39,6 +50,7 @@ export class RegisterComponent implements OnInit {
     })
 
     this.form.valueChanges
+      .debounceTime(500)
       .subscribe(data => this.onValueChanged(data));
   }
 
@@ -108,7 +120,14 @@ export class RegisterComponent implements OnInit {
       password: this.form.value['password'],
     }
 
-    console.log('submit');
+    this._authservice.registerUser(user).subscribe(data => {
+      if(data.success) {
+        this._flashMessage.show('You are now registered and able to log in!', {cssClass: 'notification is-success', timeout: 3000});
+        this._router.navigate(['/login']);
+      } else {
+
+      }
+    });
 
 
   }
