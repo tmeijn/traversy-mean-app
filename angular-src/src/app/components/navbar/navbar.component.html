@@ -13,6 +13,7 @@
       </a>
       <a 
         class="nav-item is-tab is-hidden-mobile"
+        *ngIf="_authService.isLoggedIn()"
         [routerLinkActive]="['is-active']"
         [routerLinkActiveOptions]= "{exact: true}"
         [routerLink]="['/dashboard']">
@@ -20,6 +21,7 @@
       </a>
       <a 
         class="nav-item is-tab is-hidden-mobile"
+        *ngIf="_authService.isLoggedIn()"
         [routerLinkActive]="['is-active']"
         [routerLinkActiveOptions]= "{exact: true}"
         [routerLink]="['/profile']">
@@ -34,6 +36,7 @@
     <div class="nav-right nav-menu">
       <a 
         class="nav-item is-tab is-hidden-mobile"
+        *ngIf="!_authService.isLoggedIn()"
         [routerLinkActive]="['is-active']"
         [routerLinkActiveOptions]= "{exact: true}"
         [routerLink]="['/login']">
@@ -41,12 +44,14 @@
       </a>
       <a 
         class="nav-item is-tab is-hidden-mobile"
+        *ngIf="_authService.isLoggedIn()"
         (click)="onLogoutClick()"
         href="#">
         Logout
       </a>
       <a 
         class="nav-item is-tab is-hidden-mobile"
+        *ngIf="!_authService.isLoggedIn()"
         [routerLinkActive]="['is-active']"
         [routerLinkActiveOptions]= "{exact: true}"
         [routerLink]="['/register']">

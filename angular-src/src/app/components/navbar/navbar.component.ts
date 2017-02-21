@@ -12,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
 export class NavbarComponent implements OnInit {
 
   constructor(
-    private _authservice: AuthService,
+    private _authService: AuthService,
     private _router: Router,
     private _flashMessage: FlashMessagesService
   ) { }
@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onLogoutClick() {
-    this._authservice.logout();
+    this._authService.logout();
     this._flashMessage.show('You are now logged out', {cssClass: 'notification is-info', timeout: 3000});
     this._router.navigate(['/login']);
     return false;
