@@ -5,9 +5,11 @@ import { DebugElement } from '@angular/core';
 
 import { DashboardComponent } from './dashboard.component';
 
-describe('DashboardComponent', () => {
+fdescribe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
+  let debug: DebugElement;
+  let element: HTMLElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -20,9 +22,22 @@ describe('DashboardComponent', () => {
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    debug = fixture.debugElement.query(By.css('h1'));
+    element = debug.nativeElement;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should display original title', () => {
+    fixture.detectChanges();
+    expect(element.textContent).toContain(component.title);
+  })
+
+  it('should display a different title', () => {
+    component.title = 'Test Title';
+    fixture.detectChanges();
+    expect(element.textContent).toContain('Test Title');
+  })
 });
