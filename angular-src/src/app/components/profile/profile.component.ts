@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   user: Object;
 
   constructor(
-    private _authService: AuthService,
+    public _authService: AuthService,
     private _router: Router,
     private _flashMessage: FlashMessagesService
   ) { }
