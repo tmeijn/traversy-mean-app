@@ -5,6 +5,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 
 import { ProfileComponent } from './profile.component';
@@ -20,7 +22,7 @@ let profile = {
 
 class MockAuthService {
   getProfile() {
-    return Promise.resolve(profile);
+    return Observable.of(profile);
   }
 }
 
@@ -61,4 +63,12 @@ fdescribe('ProfileComponent', () => {
 
     expect(component._authService.getProfile).toHaveBeenCalled();
   });
+
+  
+  it('should set the user object', () => {
+    fixture.detectChanges();
+
+    expect(component.user).toEqual(profile.user);
+  });
+    
 });
