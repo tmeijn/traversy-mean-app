@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { tokenNotExpired } from 'angular2-jwt';
+import { environment } from '../../environments/environment';
 
 import 'rxjs/add/operator/map';
 
@@ -8,6 +9,8 @@ import 'rxjs/add/operator/map';
 export class AuthService {
   private authToken: any;
   user: any;
+
+  private baseUrl: string = environment.apiBaseURL;
 
   constructor(private _http: Http) { 
     this.loadToken();
@@ -17,7 +20,7 @@ export class AuthService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this._http.post('http://localhost:3000/users/authenticate', user, {headers: headers})
+    return this._http.post(this.baseUrl + 'users/authenticate', user, {headers: headers})
       .map(res => res.json());
   }
 
@@ -26,7 +29,7 @@ export class AuthService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
 
-    return this._http.get('http://localhost:3000/users/profile', {headers: headers})
+    return this._http.get(this.baseUrl + 'users/profile', {headers: headers})
       .map(res => res.json());
   }
 
@@ -44,7 +47,7 @@ export class AuthService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this._http.post('http://localhost:3000/users/register', user, {headers: headers})
+    return this._http.post(this.baseUrl + 'users/register', user, {headers: headers})
       .map(res => res.json());
   }
 
