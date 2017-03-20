@@ -2,7 +2,7 @@ const router = require('express').Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
-const config = require('../config/database');
+const config = require('../config/common').config();
 const User = require('../models/user');
 
 
@@ -64,6 +64,7 @@ router.post('/authenticate', (req, res, next) => {
 
 // Profile
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+  req.user.password = "";
   res.json({user: req.user});
 });
 

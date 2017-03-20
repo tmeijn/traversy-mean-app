@@ -5,11 +5,13 @@ const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
 
-// Server Port Number
-const port = 3000;
 
 // Config file
-const config = require('./config/database');
+const common = require('./config/common');
+const config = common.config();
+
+// Server Port Number
+const port = config.port || process.env.port || 3000;
 
 // Connect to database
 mongoose.connect(config.databaseURL, (err) => {

@@ -39,6 +39,10 @@ typings
 ### Angular 2 ###
 client/**/*.js
 client/**/*.map
+public
+
+### SENSITIVE DATA ####
+env.json
 
 
 ### Node ###

@@ -26,7 +26,7 @@ class MockAuthService {
   }
 }
 
-fdescribe('ProfileComponent', () => {
+describe('ProfileComponent', () => {
   let component: ProfileComponent;
   let fixture: ComponentFixture<ProfileComponent>;
   let mockRouter = {
@@ -65,7 +65,7 @@ fdescribe('ProfileComponent', () => {
   });
 
   
-  it('should set the user object', () => {
+  it('should set the user object within the component', () => {
     fixture.detectChanges();
 
     expect(component.user).toEqual(profile.user);
