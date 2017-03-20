@@ -11,14 +11,14 @@ const common = require('./config/common');
 const config = common.config();
 
 // Server Port Number
-const port = config.port || process.env.port || 3000;
+const port = config.port || process.env.PORT || 3000;
 
 // Connect to database
 mongoose.connect(config.databaseURL, (err) => {
   if(err) {
     console.log('Error while connecting to database:', err.message);
   } else {
-    console.log('Succesfully connected to database at', config.databaseURL)
+    console.log('Succesfully connected to database at', config.databaseURL);
   }
 });
 
