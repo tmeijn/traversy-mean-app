@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs-then');
 const config = require('../config/common').config();
 
 // User Schema
@@ -38,6 +38,7 @@ const UserSchema = mongoose.Schema({
 
 const User = module.exports = mongoose.model('User', UserSchema);
 
+// Returns a Promise with the user if found. 
 module.exports.getUserById = function(id) {
   return User.findById(id).exec();
 };
@@ -47,13 +48,10 @@ module.exports.getUserByUsername = function(username, callback) {
   User.findOne(query, callback);
 };
 
-module.exports.addUser = function(newUser, callback) {
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(newUser.password, salt, (err, hash) => {
-      if(err) throw err;
-      newUser.password = hash;
-      newUser.save(callback);
-    });
+module.exports.addUser = function(newUser) {
+  return bcrypt.hash(newUser.password, 15).then(hash => {
+    newUser.password = hash;
+    return newUser.save();
   });
 };
 
