@@ -39,10 +39,10 @@ typings
 ### Angular 2 ###
 client/**/*.js
 client/**/*.map
-public
 
-### SENSITIVE DATA ####
-env.json
+### SENSITIVE DATA: COMMENT BEFORE HEROKU DEPLOYMENT ####
+# env.json
+# public
 
 
 ### Node ###
