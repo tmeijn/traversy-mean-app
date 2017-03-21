@@ -12,16 +12,17 @@ module.exports = function(passport) {
   opts.secretOrKey = config.secret;
 
   passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-    User.getUserById(jwt_payload._doc._id, (err, user) => {
-      if(err) {
-        return done(err, false);
-      }
-
+    User.getUserById(jwt_payload._doc._id).then(user => {
       if(user) {
         return done(null, user);
       } else {
         return done(null, false);
       }
+    }).catch(err => {
+      if(err) {
+        return done(err, false);
+      }
+
     });
   }));
 };

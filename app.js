@@ -5,6 +5,9 @@ const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
 
+// Inject bluebird Promise library
+mongoose.Promise = require('bluebird');
+
 
 // Config file
 const common = require('./config/common');
@@ -14,12 +17,10 @@ const config = common.config();
 const port = config.port || process.env.PORT || 3000;
 
 // Connect to database
-mongoose.connect(config.databaseURL, (err) => {
-  if(err) {
+mongoose.connect(config.databaseURL).then(() => {
+  console.log('Connected to database at', config.databaseURL);
+}).catch(err => {
     console.log('Error while connecting to database:', err.message);
-  } else {
-    console.log('Succesfully connected to database at', config.databaseURL);
-  }
 });
 
 // Init Express Server
